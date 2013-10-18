@@ -4,8 +4,14 @@ Cookiecutter: Django
 My personal Cookiecutter mold for Django. It will grow soon as I incorporate
 things like django-configurations.
 
+It currently requires the development version of cookiecutter.
+
 Project Setup
 -------------
+
+Use cookiecutter to create the project:
+
+    $ cookiecutter https://github.com/bkonkle/cookiecutter-django.git
 
 From the root project directory:
 

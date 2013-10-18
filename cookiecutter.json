@@ -2,7 +2,7 @@
     "verbose_project_name": "Project Name",
     "project_name": "project_name",
     "module_name": "module_name",
-    "author_name": "Your Name",
+    "author": "Your Name",
     "email": "Your email",
     "description": "A short description of the project.",
     "year": "2013"
