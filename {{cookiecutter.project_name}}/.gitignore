@@ -23,6 +23,9 @@ pip-log.txt
 # Django
 {{cookiecutter.project_name}}/{{cookiecutter.module_name}}/settings/local.py
 
+# Node.js
+node_modules
+
 # Local file cruft/auto-backups
 .DS_Store
 *~
