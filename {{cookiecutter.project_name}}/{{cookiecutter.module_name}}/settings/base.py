@@ -5,6 +5,10 @@ import dj_database_url
 import {{cookiecutter.module_name}}
 
 
+# -------
+# General
+# -------
+
 DEBUG = bool(os.environ.get('DEBUG', False))
 TEMPLATE_DEBUG = DEBUG
 
@@ -119,28 +123,23 @@ PROJECT_PATH, PROJECT_MODULE_NAME = os.path.split(PROJECT_MODULE_PATH)
 
 PYTHON_BIN = os.path.dirname(sys.executable)
 VAR_ROOT = os.path.join(os.path.dirname(PYTHON_BIN), 'var')
-if not os.path.exists(VAR_ROOT):
-    os.mkdir(VAR_ROOT)
 
-STATICFILES_DIRS = (os.path.join(PROJECT_PATH, "public"),)
+STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
+MEDIA_ROOT = os.path.join(VAR_ROOT, 'media')
+STATICFILES_DIRS = (os.path.join(PROJECT_MODULE_PATH, 'static'),)
+TEMPLATE_DIRS = (os.path.join(PROJECT_MODULE_PATH, 'templates'),)
+
+for path in (VAR_ROOT, STATIC_ROOT, MEDIA_ROOT):
+    if not os.path.exists(path):
+    os.mkdir(path)
 
 
-# ------------
-# Static Media
-# ------------
+# -----
+# Media
+# -----
 
-DEFAULT_FILE_STORAGE = 'checkoff.core.storage.MediaS3BotoStorage'
-STATICFILES_STORAGE = 'checkoff.core.storage.StaticS3BotoStorage'
-
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_PRELOAD_METADATA = True
-AWS_REDUCED_REDUNDANCY = True
-AWS_QUERYSTRING_AUTH = False
-
-STATIC_URL = 'https://s3.amazonaws.com/{}/'.format(AWS_STORAGE_BUCKET_NAME)
-MEDIA_URL = 'https://s3.amazonaws.com/{}/media/'.format(AWS_STORAGE_BUCKET_NAME)
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 
 # -------
@@ -170,11 +169,3 @@ LOGGING = {
         },
     }
 }
-
-
-# ----------
-# Deployment
-# ----------
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

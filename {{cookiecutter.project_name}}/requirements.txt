@@ -3,10 +3,11 @@ git+https://github.com/django/django.git@1.6b4
 git+https://github.com/boto/boto.git@py3kport
 
 dj_database_url==0.2.2
-django-storages==1.1.8
+django-allauth 0.13.0
 django-braces==1.2.2
-South==0.8.2
 django-model-utils==1.5.0
+django-storages==1.1.8
 Pillow==2.2.1
+South==0.8.2
 
 newrelic
