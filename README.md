@@ -1,10 +1,8 @@
 Cookiecutter: Django
 ====================
 
-My personal Cookiecutter mold for Django. It will grow soon as I incorporate
-things like django-configurations.
-
-It currently requires the development version of cookiecutter.
+My personal Cookiecutter mold for Django. It currently requires the development
+version of cookiecutter.
 
 Project Setup
 -------------

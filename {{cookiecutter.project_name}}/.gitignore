@@ -22,6 +22,7 @@ pip-log.txt
 
 # Django
 {{cookiecutter.project_name}}/{{cookiecutter.module_name}}/settings/local.py
+.env
 
 # Node.js
 node_modules

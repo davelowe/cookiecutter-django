@@ -1,16 +1,19 @@
-from {{cookiecutter.module_name}}.settings.base import *
+from configurations import Configuration, values
+
+from {{cookiecutter.module_name}}.settings.base import BaseConfiguration
 
 
-DEBUG = True
+class Local(BaseConfiguration):
+    DEBUG = True
 
-# INSTALLED_APPS += (
-#     'debug_toolbar',
-# )
+    # INSTALLED_APPS = BaseConfiguration.INSTALLED_APPS + (
+    #     'debug_toolbar',
+    # )
 
-# MIDDLEWARE_CLASSES += (
-#     'debug_toolbar.middleware.DebugToolbarMiddleware',
-# )
+    # MIDDLEWARE_CLASSES = BaseConfiguration.MIDDLEWARE_CLASSES + (
+    #     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # )
 
-# DEBUG_TOOLBAR_CONFIG = {
-#     'INTERCEPT_REDIRECTS': False,
-# }
+    # DEBUG_TOOLBAR_CONFIG = {
+    #     'INTERCEPT_REDIRECTS': False,
+    # }

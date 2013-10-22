@@ -1,4 +1,5 @@
+from .production import Production
 try:
-    from {{cookiecutter.module_name}}.settings.local import *
+    from .local import Local
 except ImportError:
-    from {{cookiecutter.module_name}}.settings.base import *
+    pass

@@ -1,30 +1,33 @@
-from {{cookiecutter.module_name}}.settings.base import *
+from configurations import Configuration, values
+
+from {{cookiecutter.module_name}}.settings.base import BaseConfiguration
 
 
-DEBUG = bool(os.environ.get('DEBUG', False))
-TEMPLATE_DEBUG = DEBUG
+class Production(BaseConfiguration):
 
+    DEBUG = bool(os.environ.get('DEBUG', False))
+    TEMPLATE_DEBUG = DEBUG
 
-# ------------
-# Static Media
-# ------------
+    # ------------
+    # Static Media
+    # ------------
 
-DEFAULT_FILE_STORAGE = 'checkoff.core.storage.MediaS3BotoStorage'
-STATICFILES_STORAGE = 'checkoff.core.storage.StaticS3BotoStorage'
+    DEFAULT_FILE_STORAGE = '{{cookiecutter.module_name}}.core.storage.MediaS3BotoStorage'
+    STATICFILES_STORAGE = '{{cookiecutter.module_name}}.core.storage.StaticS3BotoStorage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_PRELOAD_METADATA = True
-AWS_REDUCED_REDUNDANCY = True
-AWS_QUERYSTRING_AUTH = False
+    AWS_ACCESS_KEY_ID = values.Value('')
+    AWS_SECRET_ACCESS_KEY = values.Value('')
+    AWS_STORAGE_BUCKET_NAME = values.Value('{{cookiecutter.module_name}}')
+    AWS_PRELOAD_METADATA = values.BooleanValue(True)
+    AWS_REDUCED_REDUNDANCY = values.BooleanValue(True)
+    AWS_QUERYSTRING_AUTH = values.BooleanValue(False)
 
-STATIC_URL = 'https://s3.amazonaws.com/{}/'.format(AWS_STORAGE_BUCKET_NAME)
-MEDIA_URL = 'https://s3.amazonaws.com/{}/media/'.format(AWS_STORAGE_BUCKET_NAME)
+    STATIC_URL = values.URLValue('https://{0}.s3.amazonaws.com/static/'.format(AWS_STORAGE_BUCKET_NAME))
+    MEDIA_URL = values.URLValue('https://{0}.s3.amazonaws.com/media/'.format(AWS_STORAGE_BUCKET_NAME))
 
-# ----------
-# Deployment
-# ----------
+    # ----------
+    # Deployment
+    # ----------
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
